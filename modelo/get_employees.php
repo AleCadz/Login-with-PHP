@@ -5,13 +5,11 @@ if($conexion === false){
     die("ERROR: No se pudo conectar. " . mysqli_connect_error());
 }
 
-// Consulta para obtener solo los empleados activos
-$sql = "SELECT * FROM users WHERE active = 1";
+$search = isset($_GET['search']) ? mysqli_real_escape_string($conexion, $_GET['search']) : '';
+
+$sql = "SELECT * FROM users WHERE active = 1 AND (username LIKE '%$search%' OR email LIKE '%$search%' OR type LIKE '%$search%' OR phoneNumber LIKE '%$search%' OR birthdate LIKE '%$search%' OR RFC LIKE '%$search%')";
 if($result = mysqli_query($conexion, $sql)){
     if(mysqli_num_rows($result) > 0){
-        echo "<table class='table'>";
-        echo "<thead><tr><th>ID</th><th>Username</th><th>Email</th><th>Type</th><th>Phone Number</th><th>Birthdate</th><th>RFC</th><th>Acciones</th></tr></thead>";
-        echo "<tbody>";
         while($row = mysqli_fetch_array($result)){
             echo "<tr>";
             echo "<td>" . htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8') . "</td>";
@@ -28,10 +26,9 @@ if($result = mysqli_query($conexion, $sql)){
                   </td>";
             echo "</tr>";
         }
-        echo "</tbody></table>";
         mysqli_free_result($result);
     } else{
-        echo "No se encontraron empleados activos.";
+        echo "<tr><td colspan='8'>No se encontraron empleados activos.</td></tr>";
     }
 } else{
     echo "ERROR: No se pudo ejecutar $sql. " . mysqli_error($conexion);
@@ -39,6 +36,8 @@ if($result = mysqli_query($conexion, $sql)){
 
 mysqli_close($conexion);
 ?>
+
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>

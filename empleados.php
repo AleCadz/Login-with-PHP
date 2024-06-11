@@ -30,7 +30,6 @@ if ($datos = $sql->fetch_object()) {
 
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,9 +37,7 @@ if ($datos = $sql->fetch_object()) {
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/empleadosStyles.css">
 </head>
-
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php">Inicio</a>
@@ -65,27 +62,33 @@ if ($datos = $sql->fetch_object()) {
     <div class="container">
         <h2 class="mt-5 mb-4">Consulta de Empleados</h2>
         <a href="controlador/registro.php" class="btn btn-success mb-4">Registrar Usuario</a>
-        <div id="employeeTable" class="table-responsive">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Lista de empleados -->
-                </tbody>
-            </table>
+        <div class="mb-3">
+            <input type="text" id="searchInput" class="form-control" placeholder="Buscar empleados...">
         </div>
+        <div id="employeeTable" class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Type</th>
+                <th>Phone Number</th>
+                <th>Birthdate</th>
+                <th>RFC</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Lista de empleados-->
+        </tbody>
+    </table>
+</div>
+
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/scriptEmpleados.js"></script>
-
 </body>
-
 </html>

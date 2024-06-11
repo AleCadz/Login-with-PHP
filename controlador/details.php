@@ -82,6 +82,8 @@ mysqli_close($conexion);
                 <h2>Detalles del Usuario</h2>
             </div>
             <div class="card-body">
+                <img src="../img/<?php echo $username; ?>.jpg" class="img-fluid rounded" alt="Foto del empleado"
+                    style="width: 200px; height: 200px;">
                 <div class="form-group">
                     <label>Username</label>
                     <p class="form-control-static"><?php echo htmlspecialchars($username, ENT_QUOTES, 'UTF-8'); ?></p>

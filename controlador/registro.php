@@ -2,11 +2,30 @@
 session_start();
 
 if (!isset($_SESSION["id"])) {
-    header("Location: ../login.php");
+    header("Location: login.php");
     exit();
 }
 
+$id = $_SESSION["id"];
+$username = $_SESSION["username"];
+$email = $_SESSION["email"];
+$type = $_SESSION["type"];
+$active = $_SESSION["active"];
+$phoneNumber = $_SESSION["phoneNumber"];
+$birthdate = $_SESSION["birthdate"];
+$RFC = $_SESSION["RFC"];
 include ("../modelo/conexion.php");
+if ($type == "Ejecutivo de ventas" || $type == "Empleado") {
+    header("Location: ../index.php");
+}
+$sql = $conexion->query("select * from users where email = '$email'");
+if ($datos = $sql->fetch_object()) {
+    if ($datos->active == 0) {
+        session_destroy();
+        header("Location: login.php");
+        exit();
+    }
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
